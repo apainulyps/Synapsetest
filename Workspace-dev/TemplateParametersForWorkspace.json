@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "sy-avgipsgadp-dev"
+		},
+		"LS_ADLSGen2_properties_typeProperties_url": {
+			"value": "@{linkedService().pADLSGen2URL}"
+		},
+		"LS_AzureKeyVault_properties_typeProperties_baseUrl": {
+			"value": "@{linkedService().pKeyVaultBaseURL}"
+		},
+		"LS_HTTP_properties_typeProperties_url": {
+			"value": "@{linkedService().pBaseURL}"
+		}
+	}
+}
