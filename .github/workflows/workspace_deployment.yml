@@ -46,3 +46,4 @@ jobs:
           DeleteArtifactsNotInTemplate: 'True'
           # Use managed identity to generate the bearer token?
           managedIdentity: 'False'
+          operation: 'deploy'
