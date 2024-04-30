@@ -1,0 +1,32 @@
+name: workspace deployment
+
+on:
+  #Trigers the workflow on push or pull request events but only for the "main" branch
+  push:
+      branches: [ workspace_publish ]
+
+  # Allows you to run this wokflow manually from the Action tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+    release:
+        # You also can use the self-hosted runners.
+        runs-on: windows-latest
+        steps:
+        # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it.
+        - uses: actions/checkout@v2
+        - uses: azure/synapse-workspace-deployment@release-1.0
+        with:
+          TargetWorkspaceName: 'target workspace name'
+          TemplateFile: './path of the TemplateForWorkspace.json'
+          ParametersFile: './path of the TemplateParametersForWorkspace.json'
+          OverrideArmParameters: './path of the parameters.yaml'
+          environment: 'Azure Public'
+          resourceGroup: 'target workspace resource group'
+          clientId: ${{secrets.CLIENTID}}
+          clientSecret:  ${{secrets.CLIENTSECRET}}
+          subscriptionId: 'subscriptionId of the target workspace'
+          tenantId: 'tenantId'
+          DeleteArtifactsNotInTemplate: 'true'
+          managedIdentity: 'False'
